@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src = "/js/test.js"></script>
+<script src = "/js/jquery-3.2.1.js"></script>
+
+
+
+<body>
+<script>
+function checkValue() {
+	var objs = $("input[data-val]");
+	for(var obj of objs) {
+		var len = parseInt(obj.getAttribute("data-val"));
+		var value = obj.value.trim();
+		if(value.length<len) {
+			alert(obj.getAttribute("data-msg"));
+			obj.value = "";
+			obj.focus();
+			return false;
+		}
+		
+	}
+	return true;	
+} 
+
+
+</script>
+<form class = "form-signin" method = "get" action="./login_ok.jsp">
+<h2 id="header-test" class="form-signin-heading">로그인</h2>
+   아이디 : <input type ="text" name= "userId" id="userId" data-val="5" data-msg="아이디 입력하라고!" autofocus><br>
+   비밀번호 : <input type ="password" name="pwd" id= "userPwd" data-val="5" data-msg="비밀번호 입력하라고!" autofocus><br>
+   <input type = "submit" id = "loginBtn" value = "Login">
+   <input type="text" name="kh">
+   
+</form>
+<input type="text" name="swbb">
+</body>
+</html>

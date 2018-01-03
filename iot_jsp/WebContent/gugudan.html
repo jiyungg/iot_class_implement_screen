@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function makeGuGuDan(){
+	var num1 = document.getElementById("num1").value;
+	var num2 = document.getElementById("num2").value;
+	var str = "";
+	for(var i=1;i<=num1;i++){
+		for(var j=1;j<=num2;j++){
+			str += i + " X " + j +" = " + (i*j) + ",";
+		}
+		str = str.substring(0,str.length-1);
+		str += "<br>";
+	}
+	document.getElementById("result_div").innerHTML = str;
+}
+</script>
+<body>
+<div id="result_div"></div>
+<input type="text" id="num1"><br>
+<input type="text" id="num2"><br>
+<input type="button" value="구구단생성" onclick="makeGuGuDan()">
+</body>
+</html>

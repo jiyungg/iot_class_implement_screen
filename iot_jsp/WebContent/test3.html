@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src = "/js/jquery-3.2.1.js"></script>
+<script>
+function getPersonInfo() {
+	$.ajax({
+		url:"./test3.jsp",
+		type:"get",
+		success:function(res) {
+			var person = JSON.parse(res);
+			var str = "아이디 : " + person.id;
+			str += "이름 : " + person.name + "<br>";
+			$("#result_div").append(str);
+		}
+	});
+}
+
+</script>
+<body>
+</body>
+</html>
+
+/* person.jsp
+ * no : , id : , name : , age : , gender : , address :
+ * exam.jsp
+ * person.jsp에서 넘겨준 저 위의 구조를 가지고 파싱을 해서 추가를 해주세요.
+ * (no 버튼을 클릭 할 때마다 1++)
+ */
+
+ 
+ 

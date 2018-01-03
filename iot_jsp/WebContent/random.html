@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function generateHtml(){ 
+	var rNum = Math.floor(Math.random() * 9);
+	document.getElementById("position").innerHTML=rNum;
+	var str = ""; 
+	for(var i=0;i<9;i++){
+		str += "<input type='button' value='폭탄찾기'";
+		if(i==rNum){
+			str += " onclick='alert(\"찾았다 폭탄!!\")' "
+		}
+		str +=">";
+		if(i%3==2){
+			str+="<br>";
+		}
+	}
+	document.getElementById("result_div").innerHTML = str;
+}
+</script>
+<body onload="generateHtml()">
+<div id="result_div"></div>
+<div id="position"></div>
+</body>
+</html>
