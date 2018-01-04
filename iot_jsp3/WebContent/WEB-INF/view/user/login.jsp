@@ -23,10 +23,12 @@ function checkValue() {
 		$("#userPwd").focus();
 		return;
 	}
+	var param = {uiId:userId, uiPwd:userPwd};
+	param = "param=" + encodeURIComponent(JSON.stringify(param));
 	$.ajax({
 		url : '<%=rootPath%>/user/login',
-		data : 'userId='+userId +"&userPwd="+userPwd,
-		type : 'get', 
+		data : param,
+		type : 'get',
 		success : function(res) {
 			var obj = JSON.parse(res);
 			alert(obj.msg);

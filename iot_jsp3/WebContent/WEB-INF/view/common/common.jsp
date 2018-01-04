@@ -1,8 +1,9 @@
+<%@page import="com.iot.test.vo.UserClass"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 String rootPath = request.getContextPath();
-String userId = (String)session.getAttribute("id");
+UserClass user = (UserClass)session.getAttribute("user");
 %>
 <script src = "<%=rootPath%>/ui/js/jquery-3.2.1.js"></script>
 <script src = "<%=rootPath%>/ui/js/bootstrap.min.js"></script>
