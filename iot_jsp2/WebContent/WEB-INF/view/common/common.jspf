@@ -1,0 +1,18 @@
+<%@page import="com.iot.test.vo.UserClass"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+
+String rootPath = request.getContextPath();
+String uri = request.getRequestURI();
+UserClass user = (UserClass)session.getAttribute("user");
+if(uri.indexOf("list")==-1 && uri.indexOf("login")==-1 && uri.indexOf("signin")==-1 && user==null){
+	response.sendRedirect("/view/user/login"); 
+	return;
+}
+%>
+<script src="<%=rootPath%>/ui/js/jquery-3.2.1.js"></script>
+<script src="<%=rootPath%>/ui/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=rootPath%>/ui/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-kwkqQ7fZB5Z1oUZHYnI1NTELpNDXw1p2IoxBpi1QGzK62+u6LMHRBmD1ZzBxCoD+" crossorigin="anonymous">
+<link rel="stylesheet" href="<%=rootPath%>/ui/css/common.css">

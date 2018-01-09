@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/common/common.jsp" %>
 <%
-String loginMenu = "login";
+String loginMenu = "Login";
 String loginUrl = rootPath + "/view/user/login";
-if(user!=null) {
+if(user!=null){
 	loginMenu = "Logout";
-	loginUrl = rootPath + "/user/logout";
+	loginUrl = rootPath + "/user/logout";     	
 }
 %>
-   
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -23,7 +23,7 @@ if(user!=null) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<%=rootPath%>/">Home</a></li>
+            <li class="active"><a href="<%=rootPath%>/">Home</a></li>            
             <li><a href="<%=loginUrl%>"><%=loginMenu%></a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>

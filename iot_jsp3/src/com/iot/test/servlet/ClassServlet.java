@@ -2,21 +2,20 @@ package com.iot.test.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.iot.test.service.UserService;
-import com.iot.test.service.impl.UserServiceImpl;
-import com.iot.test.vo.UserClass;
+import com.iot.test.service.ClassService;
+import com.iot.test.service.impl.ClassServiceImpl;
+import com.iot.test.vo.ClassInfo;
 
-public class UserServlet extends HttpServlet {
-	UserService us = new UserServiceImpl();
+public class ClassServlet extends HttpServlet {
+	ClassService cs = new ClassServiceImpl();
 	Gson gs = new Gson();
 
 	public String getCommand(String uri) {
@@ -48,24 +47,13 @@ public class UserServlet extends HttpServlet {
 		String uri = req.getRequestURI();
 		//StringBuffer url = req.getRequestURL();
 		String cmd = getCommand(uri);
+		System.out.println(cmd);
 		//System.out.println(uri);
-		if (cmd.equals("login")) {
-			HashMap<String, Object> hm = us.login(req);			
-			out.println(gs.toJson(hm));
-		}else if(cmd.equals("logout")) {
-			us.logout(req);
-			RequestDispatcher rd = req.getRequestDispatcher("/view/user/login");
-			rd.forward(req, res);
-		}else if(cmd.equals("signin")) {
-			us.signin(req);
-			out.println(req.getAttribute("resStr"));
-//			System.out.println(uc);
-//			out.println(gs.toJson(uc));
-		} else if(cmd.equals("list")) {
-			ArrayList<UserClass> userList = us.getUserList();
-			out.println(gs.toJson(userList));
+		if (cmd.equals("list")) {
+			System.out.println("여기까지 됨");
+			List<ClassInfo> classList = cs.getClassList();			
+			out.println(gs.toJson(classList));
 		}
-
 	}
 	
 	
