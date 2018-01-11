@@ -113,14 +113,13 @@ $(document).ready(function(){
 				      str += '<a class="btn btn-danger" onclick="deleteUser(' + key + ')"><em class="glyphicon glyphicon-trash"</a>';				       
 				  }else{
 					  var colName = field.split(",")[0];
-					  var colType = field.split(",")[1]; //콤마를 기준으로 배열을 만들어주는 것입니다. 이건 뭐냐면. (33번 라인부터의 데이터들을)
+					  var colType = field.split(",")[1]; 
 					  if(colType=="ro") {
 						  str += uc[colName];
 					  }else{
 						  
 					  }
-				      str += "<input type='text' class='form-control' id='" + colName + key + "' value='" + uc[colName] + "'>"; //인풋타입을 준것. ([field]) -> 이제 필드타입을 줄 거에오.
-				                                                      // 요부분 <<- 아이디의 로우값을 주는 것. (예를들어 1번 유저의 이름값 - uiname1, 나이는 uiage1, 주소는 address1.)
+				      str += "<input type='text' class='form-control' id='" + colName + key + "' value='" + uc[colName] + "'>"; 
 				      				      
 				      
 			      }
