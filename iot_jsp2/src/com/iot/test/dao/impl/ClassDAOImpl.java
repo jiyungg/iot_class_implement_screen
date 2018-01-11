@@ -62,34 +62,27 @@ public class ClassDAOImpl implements ClassDAO{
 		return classList;
 	}
 	@Override
-	public UserClass selectUser(int uiNo) {	
+	public ClassInfo selectClass(int uiNo) {	
 		return null;
 	}
 	
 	@Override
-	public UserClass selectUser(String uiId) {
+	public ClassInfo selectClass(String cino) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;		
 		try {
-			con = DBCon.getCon();
-			String sql = "select * from user_info ui, class_info ci where ui.cino = ci.cino and ui.uiid=?";
+			con = DBCon.getCon();//sql 쿼리문 변경해야됨
+			String sql = "select * from class_info where cino=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, uiId);
+			ps.setString(1, cino);
 			rs = ps.executeQuery();			
 			while(rs.next()) {
-				UserClass uc = new UserClass();
-				uc.setAddress(rs.getString("address")); 
-				uc.setCiDesc(rs.getString("cidesc"));
-				uc.setCiName(rs.getString("ciname"));
-				uc.setCiNo(rs.getInt("cino"));
-				uc.setUiAge(rs.getInt("uiage"));
-				uc.setUiId(rs.getString("uiId"));
-				uc.setUiName(rs.getString("uiname"));
-				uc.setUiNo(rs.getInt("uino"));
-				uc.setUiPwd(rs.getString("uipwd"));
-				uc.setUiRegdate(rs.getString("uiregdate"));				
-				return uc;				
+				ClassInfo ci = new ClassInfo();
+				ci.setCiDesc(rs.getString("ciDesc"));
+				ci.setCiName(rs.getString("ciName"));
+				ci.setCiNo(rs.getInt("ciNo"));
+				return ci;				
 			}		
 		}catch(Exception e) {
 			e.printStackTrace();		
@@ -123,20 +116,15 @@ public class ClassDAOImpl implements ClassDAO{
 	}
 
 	@Override
-	public int insertUser(UserClass uc) {
+	public int openClass(ClassInfo ci) {
 		Connection con = null;
 		PreparedStatement ps = null;						
 		try {
 			con = DBCon.getCon();
-			String sql = "update user_info(uiname, uiage, uiid, uipwd, cino, address, uiRegdate)\r\n" + 
-					"values(?,?,?,?,?,?, now());";
+			String sql = "update user_info(ciname, cidesc) values(?,?);";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, uc.getUiName());
-			ps.setInt(2, uc.getUiAge());
-			ps.setString(3, uc.getUiId());
-			ps.setString(4, uc.getUiPwd());
-			ps.setInt(5, uc.getCiNo());
-			ps.setString(6, uc.getAddress());
+			ps.setString(1, ci.getCiName());
+			ps.setString(2, ci.getCiDesc());
 			
 			return ps.executeUpdate();			
 			
@@ -165,18 +153,17 @@ public class ClassDAOImpl implements ClassDAO{
 	}
 
 	@Override
-	public int updateUser(UserClass uc) {
+	public int updateClass(ClassInfo ci) {
 		Connection con = null;
 		PreparedStatement ps = null;						
 		try {
 			con = DBCon.getCon();
-			String sql = "update user_info " +
-			             "set uiName=?, uiAge=?, address=? where uiNo=?";
+			String sql = "update class_info " +
+			             "set ciName=?, ciDsec=? where ciNo=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, uc.getUiName());
-			ps.setInt(2, uc.getUiAge());
-			ps.setString(3, uc.getAddress());
-			ps.setInt(4, uc.getUiNo());
+			ps.setString(1, ci.getCiName());
+			ps.setString(2, ci.getCiDesc());
+			ps.setInt(3, ci.getCiNo());
 			return ps.executeUpdate();	
 			
 		}catch(Exception e) {
@@ -188,14 +175,14 @@ public class ClassDAOImpl implements ClassDAO{
 	}
 
 	@Override
-	public int deleteUser(UserClass uc) {
+	public int deleteClass(ClassInfo ci) {
 		Connection con = null;
 		PreparedStatement ps = null;						
 		try {
 			con = DBCon.getCon();
-			String sql = "delete from user_info where uiNo=?";
+			String sql = "delete from class_info where ciNo=?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, uc.getUiNo());
+			ps.setInt(1, ci.getCiNo());
 			return ps.executeUpdate();						
 		}catch(Exception e) {
 			e.printStackTrace();		

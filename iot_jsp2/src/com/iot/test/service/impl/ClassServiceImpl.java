@@ -23,65 +23,13 @@ public class ClassServiceImpl implements ClassService{
 	public List<ClassInfo> getClassList() {		
 		return cdao.selectClassList();
 	}
-	@Override
-	public HashMap<String, Object> login(HttpServletRequest req) {
-		UserClass uc = gs.fromJson(req.getParameter("param"), UserClass.class);		
-		
-		UserClass checkUc = ud.selectUser(uc.getUiId());		
-		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("msg", "로그인에 성공하셨습니다.");
-		hm.put("login", "ok");
-		if(checkUc!=null) {
-			if(!checkUc.getUiPwd().equals(uc.getUiPwd())) {
-				hm.put("msg","비밀번호를 확인하세요.");			
-				hm.put("login", "no");					
-			}else {
-				HttpSession hs = req.getSession();
-				hs.setAttribute("user", checkUc);					
-			}
-			
-		}else {
-			hm.put("msg", "아이디를 확인하세요");	
-			hm.put("login", "no");			
-		}		
-		return hm;			
-	}
 
 	@Override
-	public ArrayList<UserClass> getUserList() {		
-		return ud.selectUserList();
-	}
-	
-
-	@Override
-	public void logout(HttpServletRequest req) {
-		HttpSession hs = req.getSession();
-		hs.invalidate();		
-	}
-
-	@Override
-	public void signin(HttpServletRequest req) {
-		String json = req.getParameter("param");
-		UserClass uc = gs.fromJson(json, UserClass.class);	
-		int result = ud.insertUser(uc);
-		HashMap<String, String> rm = new HashMap<String, String>();
-		rm.put("result", "no");
-		rm.put("msg", "회원가입에 실패했습니다.");
-		if(result == 1) {
-			rm.put("result", "ok");
-			rm.put("msg", "회원가입에 성공하셨습니다.");	
-			HttpSession hs = req.getSession();
-			hs.setAttribute("user", uc);	
-		}		
-		req.setAttribute("resStr", gs.toJson(rm));		
-	}
-
-	@Override
-	public String deleteUser(HttpServletRequest req) {
-		int uiNo = Integer.parseInt(req.getParameter("uiNo"));
-		UserClass uc = new UserClass();
-		uc.setUiNo(uiNo);
-		int result = ud.updateUser(uc);
+	public String deleteClass(HttpServletRequest req) {
+		int ciNo = Integer.parseInt(req.getParameter("ciNo"));
+		ClassInfo ci=new ClassInfo();
+		ci.setCiNo(ciNo);
+		int result = cdao.updateClass(ci);
 		Map<String,String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
 		rm.put("msg", "삭제가 실패하였습니다.");
@@ -94,10 +42,10 @@ public class ClassServiceImpl implements ClassService{
 	
 	
 	@Override
-	public String updateUser(HttpServletRequest req) {
+	public String updateClass(HttpServletRequest req) {
 		String param = req.getParameter("param"); 
-		UserClass uc = gs.fromJson(param, UserClass.class);
-		int result = ud.updateUser(uc);
+		ClassInfo ci=gs.fromJson(param, ClassInfo.class);
+		int result = cdao.updateClass(ci);
 		Map<String,String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
 		rm.put("msg", "수정에 실패하였습니다.");
@@ -107,6 +55,21 @@ public class ClassServiceImpl implements ClassService{
 	    }
 	    return gs.toJson(rm); 
 	 
+	}
+	@Override
+	public String openClass(HttpServletRequest req) {
+		String param=req.getParameter("param");
+		ClassInfo ci=gs.fromJson(param, ClassInfo.class);
+		int result = cdao.openClass(ci);
+		Map<String,String> rm = new HashMap<String, String>();
+		rm.put("result", "no");
+		rm.put("msg", "수정에 실패하였습니다.");
+		if(result==1) {
+	    	rm.put("result", "ok");
+	    	rm.put("msg", "수정 성공!!");  
+	    }
+	    return gs.toJson(rm);
+		
 	}
 	
 	

@@ -9,10 +9,10 @@ public interface ClassDAO {
 	
 		
 	List<ClassInfo> selectClassList();
-	UserClass selectUser(int uiNo);
-	UserClass selectUser(String uiId);
-	int insertUser(UserClass uc);
-	int updateUser(UserClass uc);
-	int deleteUser(UserClass uc);
+	ClassInfo selectClass(int uiNo);
+	ClassInfo selectClass(String uiId);
+	int openClass(ClassInfo ci);
+	int updateClass(ClassInfo ci);
+	int deleteClass(ClassInfo ci);
 
 }
