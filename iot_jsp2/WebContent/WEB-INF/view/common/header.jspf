@@ -1,49 +1,63 @@
 <%@page import="com.iot.test.vo.UserClass"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
-String rootPath = request.getContextPath();
-UserClass user = (UserClass)session.getAttribute("user");
-String loginMenu = "Login";
-String loginUrl = rootPath + "/view/user/login";
-if(user!=null){
-	loginMenu = "Logout";
-	loginUrl = rootPath + "/user/logout";
-}
-String uri = request.getRequestURI();
-int idx = uri.lastIndexOf(".");
-if(idx!=-1) {
-	uri = uri.substring(8, idx);
-}
-%>	
+	String rootPath = request.getContextPath();
+	UserClass user = (UserClass) session.getAttribute("user");
+	String loginMenu = "Login";
+	String loginUrl = rootPath + "/view/user/login";
+	if (user != null) {
+		loginMenu = "Logout";
+		loginUrl = rootPath + "/user/logout";
+	}
+	String uri = request.getRequestURI();
+	int idx = uri.lastIndexOf(".");
+	if (idx != -1) {
+		uri = uri.substring(8, idx);
+	}
+%>
 <script src="<%=rootPath%>/ui/js/jquery-3.2.1.js"></script>
 <script src="<%=rootPath%>/ui/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<%=rootPath%>/ui/css/bootstrap.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-kwkqQ7fZB5Z1oUZHYnI1NTELpNDXw1p2IoxBpi1QGzK62+u6LMHRBmD1ZzBxCoD+" crossorigin="anonymous">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/cyborg/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-kwkqQ7fZB5Z1oUZHYnI1NTELpNDXw1p2IoxBpi1QGzK62+u6LMHRBmD1ZzBxCoD+"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="<%=rootPath%>/ui/css/common.css">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><h3 valign = 'middle'>Project name</h3></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            <a class="nav-link" href="<%=rootPath%>/"><h5 valign = 'middle'>Home</h5> <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<%=loginUrl%>"><h5 valign = 'middle'><%=loginMenu%></h5></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<%=rootPath%>/view/user/list"><h5 valign = 'middle'>User List</h5></a>
-            <li><a href="#">Class List</a></li>
-            
-            </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    
+<style>
+.active a h5{
+	color:gray;
+}
+</style>
+<script>
+	$(document).ready(function(){
+		$("li a[href='<%=uri%>']").parent().attr("class","active");
+	})
+</script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#"><h3 valign='middle'>Project
+			name</h3></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarColor02" aria-controls="navbarColor02"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span> <span class="sr-only">Toggle
+			navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarColor02">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="<%=rootPath%>/"><h5
+						valign='middle'>Home</h5> <span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="<%=loginUrl%>"><h5
+						valign='middle'><%=loginMenu%></h5></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="<%=rootPath%>/view/user/list"><h5 valign='middle'>User
+						List</h5></a>
+			<li><a href="#">Class List</a></li>
+
+		</ul>
+	</div>
+	<!--/.nav-collapse -->
+	</div>
+</nav>

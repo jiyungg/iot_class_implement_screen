@@ -25,3 +25,7 @@ ul[class='pagination']>li>a:hover{
 	color:red;
 	cursor:pointer;
 }
+
+.active h5{ 
+	color:gray;
+}
